@@ -20,10 +20,7 @@ def main():
                 delete()
             elif choice==3:
                 modify()
-            elif choice==4:
-                search()
-            elif choice==5:
-                show()
+
 
 
 
@@ -106,7 +103,7 @@ def delete():
             else:
                 print("没有所查找的书籍信息")
                 break
-            show()
+
             answer=input("是否继续删除呢(Y/N)\n")
             if answer=="Y":
                 continue
@@ -139,14 +136,10 @@ def modify():
             else:
                 wfile.write(str(d)+"\n")
 
-
-
-
-
-def search():
-    pass
-def show():
-    pass
-
 if __name__ == '__main__':
     main()
+
+
+
+
+
