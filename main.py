@@ -1,7 +1,9 @@
 
-import os
-filename="book.txt"
 
+
+
+book_list=[]
+book={}
 def main():
     while True:
         menu()
@@ -39,106 +41,49 @@ def menu():
 
 
 def insert():
-    book_list=[]
     while True:
-        book_name=input("请输入书名")
+        book_name = input("请输入书籍名称")
         if not book_name:
             break
-        author=input("请输入作者名")
+        author = input("请输入作者名")
         if not author:
             break
-
-        try:
-            date_of_publication = int(input("请输入出版日期"))
-        except:
-            print(" 输入无效 非整数")
-            continue
-
-        book={"book_name":book_name,"author":author,"date_of_publication":date_of_publication}
-        book_list.append(book)
-        answer=input("是否继续添加?（Y/N)\n")
-        if answer=="Y":
-            continue
-        else:
+        date_of_publication = input("请输入出版日期（如19910101等)")
+        if not date_of_publication:
             break
+        book = {"book_name": book_name, "author": author, "date_of_publication": date_of_publication}
+        book_list.append(book)
 
-    save(book_list)
-    print("书籍信息录入完毕")
+        break
 
-def save(list):
-    try:
-        book_txt=open(filename,"a",encoding="utf-8")
-    except:
-        book_txt=open(filename,"w",encoding="utf-8")
-    for item in list:
-        book_txt.write(str(item)+"\n")
-    book_txt.close()
+
+
 
 
 
 def delete():
-    while True:
-        book_name=input("请输入要删除的书籍名")
-        if book_name!="":
-            if os.path.exists(filename):
-                with open(filename,"r",encoding="utf-8")as file:
-                    book_name1=file.readlines()
+    book_name=input("请输入要删除的书籍名")
+    count=0
+    number=0
+    for i in book_list:
+        if book_name==i['book_name']:
+            count=1
+            delete[number]
+            print("书籍已删除")
+        number +=1
+    if count==0:
+        print("书籍不存在")
 
-            else:
-                book_name1=[]
-            flag=False
-            if book_name1:
-                with open(filename,"w",encoding="utf-8")as wfile:
-                    d={}
-                    for item in book_name1:
-                        d=dict(eval(item))
-                        if d["book_name"]!=book_name:
-                            wfile.write(str(d)+"\n")
-                        else:
-                            flag=True
-                    if flag:
-                        print(f"书名为{book_name}的书籍已删除")
-                    else:
-                        print(f"没有找到书名为{book_name}的书籍")
-            else:
-                print("没有所查找的书籍信息")
-                break
 
-            answer=input("是否继续删除呢(Y/N)\n")
-            if answer=="Y":
-                continue
-            else:
-                break
+
+
+
+
+
 def modify():
-    if os.path.exists(filename):
-        with open(filename,"r",encoding="utf-8")as rfile:
-            book_name1=rfile.readlines()
-    else:
-        return
-    book_name=input("请您输入要修改的书籍名称")
-    with open(filename,"w",encoding="utf-8")as wfile:
-        for item in book_name1:
-            d=dict(eval(item))
-            if d["book_name"]==book_name:
-                print("找到您所寻找的书籍 可以修改内容 ")
-                while True:
-                   try:
-                    d["name"]=input("请输入书籍名称")
-                    d["author"]=input("请输入作者名")
-                    d["date_of_publication"]=input("请输入出版日期")
-                   except:
-                       print("非法输入")
-                   else:
-                       break
-                wfile.write(str(d)+"\n")
-                print("修改书籍内容成功")
+    pass
 
-            else:
-                wfile.write(str(d)+"\n")
-
-if __name__ == '__main__':
-    main()
-
+main()
 
 
 
