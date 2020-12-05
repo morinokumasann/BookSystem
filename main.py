@@ -22,6 +22,10 @@ def main():
                 delete()
             elif choice==3:
                 modify()
+            elif choice==4:
+                search()
+            elif choice==5:
+                show()
 
 
 
@@ -62,13 +66,14 @@ def insert():
 
 
 def delete():
-    book_name=input("请输入要删除的书籍名")
+    book_name=input("请输入要删除的书籍名称")
     count=0
     number=0
+    global book_list
     for i in book_list:
         if book_name==i['book_name']:
             count=1
-            delete[number]
+            del [number]
             print("书籍已删除")
         number +=1
     if count==0:
@@ -81,7 +86,44 @@ def delete():
 
 
 def modify():
-    pass
+    book_name=input("请输入要修改的书籍名称")
+    count = 0
+    number = 0
+    global book_list
+    for i in book_list:
+        if book_name==i["book_name"]:
+            count=1
+            del book_list[number]
+            new_book_name=book_name
+            author = input("请输入要修改的作者名")
+            date_of_publication=input("请输入要修改出版日期（如19910101等)")
+            new_book={"book_name":new_book_name,"author":author,"date_of_publication":date_of_publication}
+            book_list.append(new_book)
+            print("修改成功")
+        number+=1
+    if count==0:
+        print("书籍不存在")
+
+
+
+def search():
+    book_name = input("请输入要查看书籍名称")
+    count=0
+    print("书籍名称\t作者\t出版日期\t")
+    global book_list
+    for i in book_list:
+        if book_name ==i["book_name"]:
+            count=1
+            print('%s\t%s\t%s\t'%(i['book_name'],i['author'],i["date_of_publication"]))
+    if count==0:
+            print("书籍不存在")
+
+
+def show():
+    print("书籍名称\t作者\t出版日期\t")
+    global book_list
+    for i in book_list:
+        print('%s\t%s\t%s\t'%(i['book_name'],i['author'],i['date_of_publication']))
 
 main()
 
