@@ -1,6 +1,6 @@
 
 
-
+from datetime import datetime
 
 book_list=[]
 book={}
@@ -52,7 +52,7 @@ def insert():
             book_list.append(book)
             break
         else:
-            print("miss")
+            print("您输入了非法格式 请输入正确的格式 类似（19910909）")
 
 
 def delete():
@@ -87,9 +87,12 @@ def modify():
             new_book_name=book_name
             author = input("请输入要修改的作者名")
             date_of_publication=input("请输入要修改出版日期（如19910101等)")
-            new_book={"book_name":new_book_name,"author":author,"date_of_publication":date_of_publication}
-            book_list.append(new_book)
-            print("修改成功")
+            if date_of_publication.isdigit():
+                new_book={"book_name":new_book_name,"author":author,"date_of_publication":date_of_publication}
+                book_list.append(new_book)
+                print("修改成功")
+            else:
+                print("您输入了非法格式 请输入正确的格式 类似（19910909）")
         number+=1
     if count==0:
         print("书籍不存在")
@@ -114,6 +117,9 @@ def show():
     global book_list
     for i in book_list:
         print('%s\t%s\t%s\t'%(i['book_name'],i['author'],i['date_of_publication']))
+
+
+
 
 
 main()
