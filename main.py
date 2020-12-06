@@ -27,12 +27,6 @@ def main():
             elif choice==5:
                 show()
 
-
-
-
-
-
-
 def menu():
     print("---------------图书管理系统---------------")
     print("-----------------功能菜单-----------------")
@@ -53,16 +47,12 @@ def insert():
         if not author:
             break
         date_of_publication = input("请输入出版日期（如19910101等)")
-        if not date_of_publication:
+        if date_of_publication.isdigit():
+            book = {"book_name": book_name, "author": author, "date_of_publication": date_of_publication}
+            book_list.append(book)
             break
-        book = {"book_name": book_name, "author": author, "date_of_publication": date_of_publication}
-        book_list.append(book)
-
-        break
-
-
-
-
+        else:
+            print("miss")
 
 
 def delete():
@@ -73,9 +63,9 @@ def delete():
     for i in book_list:
         if book_name==i['book_name']:
             count=1
-            del [number]
+            del book_list[number]
             print("书籍已删除")
-        number +=1
+            number +=1
     if count==0:
         print("书籍不存在")
 
@@ -124,6 +114,7 @@ def show():
     global book_list
     for i in book_list:
         print('%s\t%s\t%s\t'%(i['book_name'],i['author'],i['date_of_publication']))
+
 
 main()
 
